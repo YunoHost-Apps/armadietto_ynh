@@ -1,12 +1,16 @@
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * requiring a full dedicated domain ?
-    * architectures not supported ?
-    * not-working single-sign on or LDAP integration ?
-    * the app requires an important amount of RAM / disk / .. to install or to work properly
+## TODO
+
+* Toute limitation ou contrainte connue ou tout élément ne fonctionnant pas, tel que (mais non limité à) :
+    * nécessitant un domaine dédié complet ?
+    * architectures non prises en charge ?
+    * L'authentification unique ou l'intégration LDAP ne fonctionnent pas ?
+    * l'application nécessite une quantité importante de RAM / disque / ... pour s'installer ou fonctionner correctement.
     * etc...
 
-* Other infos that people should be aware of, such as:
-    * any specific step to perform after installing (such as manually finishing the install, specific admin credentials, ...)
-    * how to configure / administrate the application if it ain't obvious
-    * upgrade process / specificities / things to be aware of ?
-    * security considerations ?
+* D'autres informations que les gens devraient connaître, comme.. :
+    * toute étape spécifique à effectuer après l'installation (comme terminer manuellement l'installation, des identifiants d'administration spécifiques, ...)
+    * Comment configurer / administrer l'application si ce n'est pas évident.
+    * le processus de mise à niveau, les spécificités, les choses à savoir ?
+    * Considérations de sécurité
+
+Traduit avec www.DeepL.com/Translator (version gratuite)

@@ -1,5 +1,5 @@
 [Unit]
-Description=Small description of the service
+Description=Armadietto remoteStorage server written in nodejs
 After=network.target
 
 [Service]
