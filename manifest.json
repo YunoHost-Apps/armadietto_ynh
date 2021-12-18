@@ -6,16 +6,14 @@
         "en": "Armadietto is a remoteStorage server written for Node.js.",
         "fr": "Armadietto est un serveur remoteStorage écrit pour node.js."
     },
-    "version": "0.2.0",
+    "version": "1.0.1~ynh2",
     "url": "https://github.com/remotestorage/armadietto",
     "upstream": {
-        "license": "WTFPL",
-        "website": "https://example.com",
-        "demo": "https://demo.example.com",
-        "admindoc": "https://yunohost.org/packaging_apps",
-        "userdoc": "https://yunohost.org/apps",
-        "code": "https://some.forge.com/example/example"
+        "license": "MIT",
+        "website": "https://remotestorage.io/",
+        "code": "https://github.com/remotestorage/armadietto"
     },
+    "license": "WTFPL",
     "maintainer": {
         "name": "bencharp",
         "email": "contact@bencharp.com",
@@ -32,35 +30,22 @@
         "install" : [
             {
                 "name": "domain",
-                "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for your armadietto remoteStorage server",
-                    "fr": "Choisissez un nom de domaine pour votre serveur remoteStorage armadietto"
-                },
-                "example": "store.yunohost.packaging"
+                "type": "domain"
             },
             {
                 "name": "path",
                 "type": "path",
-                "ask": {
-                    "en": "Choose a path for armadietto",
-                    "fr": "Choisissez un chemin pour armadietto"
-                },
                 "example": "/",
                 "default": "/"
             },
             {
                 "name": "is_public",
                 "type": "boolean",
+                "default": true,
                 "help": {
                     "en": "Would you like to restrein the access to this web site?",
                     "fr": "Souhaitez-vous limiter l'accès à ce site web ?"
-                },
-                "ask": {
-					"en": "Is it a public site?",
-					"fr": "Est-ce un site publique ?"
-				},
-                "default": true
+                }
             },
             {
                 "name": "is_signup",

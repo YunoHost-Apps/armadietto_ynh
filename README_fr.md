@@ -1,66 +1,64 @@
-# Example app pour YunoHost
+# Armadietto package pour Yunohost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/example.svg)](https://dash.yunohost.org/appci/app/example) ![](https://ci-apps.yunohost.org/ci/badges/example.status.svg)  ![](https://ci-apps.yunohost.org/ci/badges/example.maintain.svg)
-[![Installer example avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=example)
+[![Integration level](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg)  ![](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
+
+[![Install Armadietto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
 *[Read this readme in english.](./README.md)*
-*[Lire ce readme en français.](./README_fr.md)*
 
-> *This package allows you to install example quickly and simply on a YunoHost server.
-If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
 
-## Vue d'ensemble
+> *Ce paquetage vous permet d'installer  Armadietto rapidement et simplement sur un serveur YunoHost.
+Si vous n'avez pas YunoHost, veuillez consulter [le guide](https://yunohost.org/#/install) pour savoir comment l'installer.*
 
-Expliquez en *quelques* (10~15) mots l'utilité de l'app ou ce qu'elle fait (l'objectif est de donner une idée grossière pour des utilisateurs qui naviguent dans un catalogue de 100+ apps)
+## Aperçu d'Armadietto
 
-**Version incluse:** 1.0~ynh1
+[Armadietto](https://github.com/remotestorage/armadietto/) est un serveur [remoteStorage](https://remotestorage.io) écrit pour Node.js.
 
-**Démo:** https://demo.example.com
+Armadietto est maintenu par l'équipe remoteStorage [IRC](https://kiwiirc.com/client/irc.freenode.net/#remotestorage).
+
+> ### :warning : WARNING
+> Veuillez ne pas considérer `armadietto` comme prêt pour la production, ce projet est toujours
+> comme expérimental.  Comme avec toute technologie de stockage en phase alpha, vous
+> devez vous attendre à ce qu'elle mange vos données et prendre des précautions contre cela. Vous
+> Vous devez vous attendre à ce que ses API et ses schémas de stockage changent avant qu'il ne soit 
+> étiqueté comme stable.
+
+**Version livrée:** 0.1.5
 
 
 ## Captures d'écran
 
 
-   ![](./doc/screenshots/example.jpg)
+   ![](./doc/screenshots/armadietto.png)
 
 
 
 
 ## Avertissements / informations importantes
 
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * requiring a full dedicated domain ?
-    * architectures not supported ?
-    * not-working single-sign on or LDAP integration ?
-    * the app requires an important amount of RAM / disk / .. to install or to work properly
-    * etc...
+### Notes importantes
+RemoteStorage nécessite un domaine dédié, il faut donc en obtenir un et l'ajouter en utilisant le panneau d'administration de YunoHost. **Domaines -> Ajouter un domaine**. Comme RemoteStorage utilise le domaine complet et est installé à la racine, vous pouvez créer un sous-domaine tel que remote.domain.tld. N'oubliez pas de mettre à jour vos DNS si vous les gérez manuellement.
 
-* Other infos that people should be aware of, such as:
-    * any specific step to perform after installing (such as manually finishing the install, specific admin credentials, ...)
-    * how to configure / administrate the application if it ain't obvious
-    * upgrade process / specificities / things to be aware of ?
-    * security considerations ?
+RemoteStorage nécessite des certificats SSL approuvés par le navigateur. Si vous disposez de certificats qui ne sont pas émis par [Let's Encrypt](https://letsencrypt.org/), installez-les manuellement comme d'habitude.
 
+
+### Application pour remoteStorage
+[Cliquez ici](https://remotestorage.io/apps/) pour voir la liste des applications qui peuvent être utilisées avec RemoteStorage.
 
 
 ## Documentations et ressources
 
-* Site official de l'app : https://example.com
-* Documentation officielle utilisateur: https://yunohost.org/apps
-* Documentation officielle de l'admin: https://yunohost.org/packaging_apps
-* Dépôt de code officiel de l'app:  https://some.forge.com/example/example
-* Documentation YunoHost pour cette app: https://yunohost.org/app_example
-* Signaler un bug: https://github.com/YunoHost-Apps/example_ynh/issues
+* Site Web officiel de l'application : https://remotestorage.io/
+* Dépôt de code de l'application en amont : https://github.com/remotestorage/armadietto/
+* Signalez un bogue : https://github.com/bencharp/armadietto_ynh/issues
 
 ## Informations pour les développeurs
 
-Merci de faire vos pull request sur la [branche testing](https://github.com/YunoHost-Apps/example_ynh/tree/testing).
+Veuillez envoyer votre demande à la [branche de test] (https://github.com/bencharp/armadietto_ynh/tree/testing).
 
-Pour essayer la branche testing, procédez comme suit.
+Pour essayer la branche testing, veuillez procéder comme suit.
 ```
-sudo yunohost app install https://github.com/YunoHost-Apps/example_ynh/tree/testing --debug
-or
-sudo yunohost app upgrade example -u https://github.com/YunoHost-Apps/example_ynh/tree/testing --debug
+sudo yunohost app install https://github.com/bencharp/armadietto_ynh/tree/testing --debug
+ou
+sudo yunohost app upgrade armadietto_ynh -u https://github.com/bencharp/armadietto_ynh/tree/testing --debug
 ```
-
-**Plus d'infos sur le packaging d'applications:** https://yunohost.org/packaging_apps

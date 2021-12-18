@@ -1,5 +1,5 @@
 [Unit]
-Description=Armadietto remoteStorage server written in nodejs
+Description=Armadietto is a remoteStorage server written in nodejs
 After=network.target
 
 [Service]
@@ -7,9 +7,10 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__FINALPATH__/
-ExecStart=__FINALPATH__/script
-StandardOutput=append:/var/log/__APP__/__APP__.log
-StandardError=inherit
+ExecStart=__NODEJS_PATH__/node __FINALPATH__/server.js
+Restart=always
+Environment=PATH=/usr/bin:/usr/local/bin:__NODEJS_PATH__
+Environment=NODE_ENV=production
 
 # Sandboxing options to harden security
 # Depending on specificities of your service/app, you may need to tweak these 
@@ -28,6 +29,7 @@ ProtectKernelModules=yes
 ProtectKernelTunables=yes
 LockPersonality=yes
 SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap
+
 
 # Denying access to capabilities that should not be relevant for webapps
 # Doc: https://man7.org/linux/man-pages/man7/capabilities.7.html
