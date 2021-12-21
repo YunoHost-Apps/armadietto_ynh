@@ -31,6 +31,9 @@ is_signup=$YNH_APP_ARG_IS_SIGNUP
 
 app=$YNH_APP_INSTANCE_NAME
 
+# Define app's data directory
+datadir="/home/yunohost.app/${app}/storage"
+
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
@@ -56,7 +59,9 @@ ynh_script_progression --message="Storing installation settings..." --weight=1
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=final_path --value=final_path
 ynh_app_setting_set --app=$app --key=is_signup --value=$is_signup
+ynh_app_setting_set --app=$app --key=datadir --value=$datadir
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -116,31 +121,35 @@ ynh_script_progression --message="Configuring system user..." --weight=1
 ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..."
+
+ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
+
+chmod 400 "$final_path/config.yml"
+chown $app:$app "$final_path/config.yml"
+
+#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
-
-ynh_replace_string --match_string="__NODEJS_PATH__"	--replace_string="$nodejs_path"	--target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__ENV_PATH__"	--replace_string="$PATH"		--target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__FINALPATH__"	--replace_string="$final_path"	--target_file="../conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
 
 #=================================================
-# DEFINE ARMADIETTO OPTIONS & CREATE DIRECTORY FOR DATA
+# SETUP ARMADIETTO AS A SERVICE
 #=================================================
-ynh_script_progression --message="Configuring armadietto options..." --weight=1
+ynh_script_progression --message="Configuring armadietto as a service..." --weight=1
 
 # Define armadietto module path
 modulepath="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
-# Define app's data directory
-datadir="/home/yunohost.app/${app}/storage"
-
-# Create app folders
+# Create app data folder
 mkdir -p "$datadir"
 
+# Using Armadietto as a service in a basic node server
 cp -f ../conf/server.js "$final_path/server.js"
 
 ynh_replace_string --match_string="__MODULE_PATH__"	--replace_string="$modulepath"	--target_file="$final_path/server.js"
@@ -154,10 +163,11 @@ ynh_replace_string --match_string="__SIGNUP__"		--replace_string="$is_signup"	--
 #=================================================
 ynh_script_progression --message="Install armadietto with npm..." --weight=1
 
-cd $final_path
-npm -g i armadietto
+pushd $final_path
+	ynh_npm -g i armadietto
+popd
 
-ynh_script_progression --message="Armadietto installed..." --weight=1
+ynh_script_progression --message="Armadietto installed..."
 
 #=================================================
 # GENERIC FINALIZATION
@@ -186,14 +196,6 @@ ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
 
 #=================================================
-# SETUP FAIL2BAN
-#=================================================
-# ynh_script_progression --message="Configuring Fail2Ban..." --weight=1
-
-# Create a dedicated Fail2Ban config
-# ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
-
-#=================================================
 # SETUP SSOWAT
 #=================================================
 ynh_script_progression --message="Configuring permissions..." --weight=1
@@ -205,17 +207,6 @@ then
 	# The "main" permission is automatically created before the install script.
 	ynh_permission_update --permission="main" --add="visitors"
 fi
-
-### N.B. : the following extra permissions only make sense if your app
-### does have for example an admin interface or an API.
-
-# Only the admin can access the admin panel of the app (if the app has an admin panel)
-# ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
-
-# Everyone can access the API part
-# We don't want to display the tile in the SSO so we put --show_tile="false"
-# And we don't want the YunoHost admin to be able to remove visitors group to this permission, so we put --protected="true"
-# ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX

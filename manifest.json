@@ -6,7 +6,7 @@
         "en": "Armadietto is a remoteStorage server written for Node.js.",
         "fr": "Armadietto est un serveur remoteStorage écrit pour node.js."
     },
-    "version": "1.0.1~ynh2",
+    "version": "0.0.2-beta.10~ynh2",
     "url": "https://github.com/remotestorage/armadietto",
     "upstream": {
         "license": "MIT",
@@ -58,7 +58,7 @@
                     "en": "Would you like to allow visitors to register and create an account?",
                     "fr": "Souhaitez-vous autoriser les visiteurs à s'inscrire et créer un compte ?"
                 },
-                "default": false
+                "default": true
             }
         ]
     }

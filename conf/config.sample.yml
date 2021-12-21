@@ -1,0 +1,10 @@
+#=================================================
+# ARMADIETTO CONFIGURATION 
+#=================================================
+
+
+final_path: __FINALPATH__
+datadir: __DATADIR__
+port: __PORT__
+domain: __DOMAIN__
+
