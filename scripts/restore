@@ -38,8 +38,7 @@ datadir=$(ynh_app_setting_get --app=$app --key=datadir)
 #=================================================
 ynh_script_progression --message="Validating restoration parameters..." --weight=1
 
-test ! -d $final_path \
-	|| ynh_die --message="There is already a directory: $final_path "
+test ! -d $final_path || ynh_die --message="There is already a directory: $final_path "
 
 #=================================================
 # REINSTALL DEPENDENCIES
@@ -98,8 +97,6 @@ pushd $final_path
 	ynh_npm -g i armadietto
 popd
 
-ynh_script_progression --message="Armadietto reinstalled..."
-
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
@@ -116,8 +113,9 @@ ynh_use_logrotate
 ynh_script_progression --message="Secure files and directories" --weight=1
 
 # Set permissions to app files
-chown -R $app:$app "$final_path"
-chmod 0700 $datadir && chown $app:$app $datadir
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST

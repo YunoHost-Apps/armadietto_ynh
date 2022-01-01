@@ -26,12 +26,6 @@ is_signup=$(ynh_app_setting_get --app=$app --key=signup)
 # CHECK VERSION
 #=================================================
 
-### This helper will compare the version of the currently installed app and the version of the upstream package.
-### $upgrade_type can have 2 different values
-### - UPGRADE_APP if the upstream app version has changed
-### - UPGRADE_PACKAGE if only the YunoHost package has changed
-### ynh_check_app_version_changed will stop the upgrade if the app is up to date.
-### UPGRADE_APP should be used to upgrade the core app only if there's an upgrade to do.
 upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
@@ -113,7 +107,7 @@ ynh_use_nodejs
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
 
@@ -126,19 +120,12 @@ chown $app:$app "$final_path/config.yml"
 ynh_script_progression --message="Configuring armadietto as a service..." --weight=1
 
 # Define armadietto module path
-modulepath="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
-# Create app data folder
-mkdir -p "$datadir"
+ynh_add_config --template="../conf/server.js" --destination="$final_path/server.js"
 
-# Using Armadietto as a service in a basic node server
-cp -f ../conf/server.js "$final_path/server.js"
-
-ynh_replace_string --match_string="__MODULE_PATH__"	--replace_string="$modulepath"	--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__DATADIR__"		--replace_string="$datadir"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__PORT__"		--replace_string="$port"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__DOMAIN__"		--replace_string="$domain"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__SIGNUP__"		--replace_string="$is_signup"	--target_file="$final_path/server.js"
+chmod 400 "$final_path/server.js"
+chown $app:$app "$final_path/server.js"
 
 #=================================================
 # UPGRADE ARMADIETTO
@@ -150,8 +137,6 @@ then
 	pushd $final_path
 		ynh_npm -g i armadietto
 	popd
-
-	ynh_script_progression --message="Armadietto upgraded..."
 fi
 
 #=================================================
@@ -203,8 +188,9 @@ ynh_use_logrotate
 ynh_script_progression --message="Secure files and directories" --weight=1
 
 # Set permissions to app files
-chown -R $app:$app "$final_path"
-chmod 0700 $datadir && chown $app:$app $datadir
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
