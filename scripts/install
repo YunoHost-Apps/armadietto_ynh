@@ -37,10 +37,8 @@ datadir="/home/yunohost.app/${app}/storage"
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..." --weight=1
+ynh_script_progression --message="Validating installation parameters..." --weight=2
 
-### If the app uses NGINX as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uWSGI), the final path should be "/opt/yunohost/$app"
 final_path=/opt/yunohost/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
@@ -68,24 +66,16 @@ ynh_app_setting_set --app=$app --key=datadir --value=$datadir
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Finding an available port..." --weight=1
+ynh_script_progression --message="Finding an available port..." --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8008)
 ynh_app_setting_set --app=$app --key=port --value=$port
 
-# Optional: Expose this port publicly
-# (N.B.: you only need to do this if the app actually needs to expose the port publicly.
-# If you do this and the app doesn't actually need you are CREATING SECURITY HOLES IN THE SERVER !)
-
-# Open the port
-# ynh_script_progression --message="Configuring firewall..." --weight=1
-# ynh_exec_warn_less yunohost firewall allow --no-upnp TCP $port
-
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=4
+ynh_script_progression --message="Installing dependencies..." --weight=23
 
 ynh_install_nodejs --nodejs_version=$NODEJS_VERSION
 ynh_use_nodejs
@@ -105,7 +95,7 @@ mkdir -p "$final_path"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..." --weight=1
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 
 ### `ynh_add_nginx_config` will use the file conf/nginx.conf
 
@@ -115,7 +105,7 @@ ynh_add_nginx_config
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
+ynh_script_progression --message="Configuring system user..." --weight=2
 
 # Create a system user
 ynh_system_user_create --username=$app
@@ -123,7 +113,7 @@ ynh_system_user_create --username=$app
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
 
@@ -133,30 +123,33 @@ chown $app:$app "$final_path/config.yml"
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --weight=3
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
 
 #=================================================
-# SETUP ARMADIETTO AS A SERVICE
+# CREATE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Configuring armadietto as a service..." --weight=1
+ynh_script_progression --message="Creating a data directory..." --weight=1
 
-# Define armadietto module path
-modulepath="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+ynh_app_setting_set --app=$app --key=datadir --value=$datadir
 
 # Create app data folder
-mkdir -p "$datadir"
+mkdir -p $datadir
 
-# Using Armadietto as a service in a basic node server
-cp -f ../conf/server.js "$final_path/server.js"
+#=================================================
+# SETUP ARMADIETTO AS A SERVICE
+#=================================================
+ynh_script_progression --message="Configuring armadietto as a service..." --weight=2
 
-ynh_replace_string --match_string="__MODULE_PATH__"	--replace_string="$modulepath"	--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__DATADIR__"		--replace_string="$datadir"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__PORT__"		--replace_string="$port"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__DOMAIN__"		--replace_string="$domain"		--target_file="$final_path/server.js"
-ynh_replace_string --match_string="__SIGNUP__"		--replace_string="$is_signup"	--target_file="$final_path/server.js"
+# Define armadietto module path
+module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+
+ynh_add_config --template="../conf/server.js" --destination="$final_path/server.js"
+
+chmod 400 "$final_path/server.js"
+chown $app:$app "$final_path/server.js"
 
 #=================================================
 # INSTALL ARMADIETTO
@@ -166,8 +159,6 @@ ynh_script_progression --message="Install armadietto with npm..." --weight=1
 pushd $final_path
 	ynh_npm -g i armadietto
 popd
-
-ynh_script_progression --message="Armadietto installed..."
 
 #=================================================
 # GENERIC FINALIZATION
@@ -186,19 +177,20 @@ ynh_script_progression --message="Secure files and directories" --weight=1
 
 # Set permissions to app files
 chown -R $app:$app "$final_path"
-chmod 0700 $datadir && chown $app:$app $datadir
+chmod 0700 "$datadir"
+chown $app:$app "$datadir"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
+yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions..." --weight=1
+ynh_script_progression --message="Configuring permissions..." --weight=2
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
