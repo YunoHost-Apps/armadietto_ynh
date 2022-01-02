@@ -1,4 +1,3 @@
-## Armadietto overview
 
 [Armadietto](https://github.com/remotestorage/armadietto/) is a [remoteStorage](https://remotestorage.io) server written for Node.js.
 
