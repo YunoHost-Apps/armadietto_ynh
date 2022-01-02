@@ -15,7 +15,6 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-## Armadietto overview
 
 [Armadietto](https://github.com/remotestorage/armadietto/) is a [remoteStorage](https://remotestorage.io) server written for Node.js.
 
@@ -39,7 +38,7 @@ Armadietto is maintained by remoteStorage Team [IRC](https://kiwiirc.com/client/
 - liste des caractéristiques...
 
 
-**Shipped version:** 0.0.2-beta.10~ynh4
+**Shipped version:** 0.0.2~ynh6
 
 
 
@@ -49,33 +48,31 @@ Armadietto is maintained by remoteStorage Team [IRC](https://kiwiirc.com/client/
 
 ## Disclaimers / important information
 
-## Disclaimers / important information
-
 ### :warning: WARNING
 Armadietto_ynh still in develoment:
 
-* The upgrade process is not yet operational
-* Single sign-on or LDAP integration not working?
 * Security considerations from [Armadietto](https://github.com/remotestorage/armadietto/) :
 
-> Storage security
+
+>### **Storage security**
 >
-> In production, we recommend that you restrict access to the files managed by your armadietto server as much as possible. This is particularly true if you host your storage on a machine with other web applications; you need to protect your files in the event that one of those apps is exploited.
-> 
-> You should take these steps to keep your storage safe:
-> 
->     Pick a unique Unix user to run your server process; no other process on the box should run as this user: sudo useradd armadietto --system --no-create-home
-> 
->     Do not run other applications as root, or as any user that could access files owned by your armadietto user
-> 
->     Make sure the directory path/to/storage cannot be read, written or executed by anyone but this user: sudo chmod 0700 /path/to/storage && sudo chown armadietto /path/to/storage
-> 
->     Do not run armadietto as root; if you need to bind to port 80 or 443 use a reverse proxy like nginx, Apache2, caddy, lighttpd or enable bind capability: setcap 'cap_net_bind_service=+ep' `which armadietto`
-> 
->     Ideally, run your storage inside a container or on a dedicated machine
+>In production, we recommend that you restrict access to the files managed by your armadietto server as much as possible. This is particularly true if you host your storage on a machine with other web applications; you need to protect your files in the event that one of those apps is exploited.
+>
+>You should take these steps to keep your storage safe:
+>
+>    - Pick a unique Unix user to run your server process; no other process on the box should run as this user: sudo useradd armadietto --system --no-create-home
+>
+>    - Do not run other applications as root, or as any user that could access files owned by your armadietto user
+>
+>    - Make sure the directory path/to/storage cannot be read, written or executed by anyone but this user: sudo chmod 0700 /path/to/storage && sudo chown armadietto /path/to/storage
+>
+>    - Do not run armadietto as root; if you need to bind to port 80 or 443 use a reverse proxy like nginx, Apache2, caddy, lighttpd or enable bind capability: setcap 'cap_net_bind_service=+ep' `which armadietto`
+>
+>    - Ideally, run your storage inside a container or on a dedicated machine
 
+<br />
 
-### Important Notes
+### **Important Notes**
 
 - RemoteStorage requires a dedicated domain, so obtain one and add it using the YunoHost admin panel. **Domains -> Add domain**. 
 - As RemoteStorage uses the full domain and is installed on the root, you can create a subdomain such as remote.domain.tld. 

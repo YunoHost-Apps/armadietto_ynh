@@ -11,7 +11,6 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-## Aperçu d'Armadietto
 
 [Armadietto](https://github.com/remotestorage/armadietto/) est un serveur [remoteStorage](https://remotestorage.io) écrit pour Node.js.
 
@@ -30,7 +29,7 @@ Armadietto est maintenu par l'équipe remoteStorage [IRC](https://kiwiirc.com/cl
 
 [Cliquez ici](https://remotestorage.io/apps/) pour voir la liste des applications qui peuvent être utilisées avec RemoteStorage.
 
-**Version incluse :** 0.0.2-beta.10~ynh4
+**Version incluse :** 0.0.2~ynh6
 
 
 
@@ -40,33 +39,32 @@ Armadietto est maintenu par l'équipe remoteStorage [IRC](https://kiwiirc.com/cl
 
 ## Avertissements / informations importantes
 
-## Avertissements / informations importantes
-
 ### :warning: WARNING
 Armadietto_ynh still in develoment:
-* le processus de mise à niveau n'est pas encore opérationnel
+
 * l'authentification unique ou l'intégration LDAP ne fonctionne pas ?
 * Considérations sur la sécurité de [Armadietto](https://github.com/remotestorage/armadietto/) :
 
-> Sécurité du stockage
->
+
+> ### **Sécurité du stockage**
+> 
 > En production, nous vous recommandons de restreindre autant que possible l'accès aux fichiers gérés par votre serveur armadietto. Ceci est particulièrement vrai si vous hébergez votre stockage sur une machine avec d'autres applications web ; vous devez protéger vos fichiers dans le cas où l'une de ces applications serait exploitée.
 > 
 > Vous devez prendre les mesures suivantes pour assurer la sécurité de votre stockage :
 > 
-> Choisissez un utilisateur Unix unique pour exécuter votre processus serveur ; aucun autre processus sur la machine ne doit être exécuté sous cet utilisateur : sudo useradd armadietto --system --no-create-home
+>    - Choisissez un utilisateur Unix unique pour exécuter votre processus serveur ; aucun autre processus sur la machine ne doit être exécuté sous cet utilisateur : sudo useradd armadietto --system --no-create-home
 > 
-> Ne lancez pas d'autres applications en tant que root, ou en tant qu'utilisateur qui pourrait accéder à des fichiers appartenant à votre utilisateur armadietto.
+>    - Ne lancez pas d'autres applications en tant que root, ou en tant qu'utilisateur qui pourrait accéder à des fichiers appartenant à votre utilisateur armadietto.
 > 
-> Assurez-vous que le répertoire path/to/storage ne peut être lu, écrit ou exécuté par personne d'autre que cet utilisateur : sudo chmod 0700 /path/to/storage && sudo chown armadietto /path/to/storage
+>    - Assurez-vous que le répertoire path/to/storage ne peut être lu, écrit ou exécuté par personne d'autre que cet utilisateur : sudo chmod 0700 /path/to/storage && sudo chown armadietto /path/to/storage
 > 
-> Ne lancez pas armadietto en tant que root ; si vous avez besoin de vous lier au port 80 ou 443, utilisez un reverse proxy comme nginx, Apache2, caddy, lighttpd ou activez la capacité de liaison : setcap 'cap_net_bind_service=+ep' `which armadietto`.
+>    - Ne lancez pas armadietto en tant que root ; si vous avez besoin de vous lier au port 80 ou 443, utilisez un reverse proxy comme nginx, Apache2, caddy, lighttpd ou activez la capacité de liaison : setcap 'cap_net_bind_service=+ep' `which armadietto`.
 > 
-> Idéalement, exécutez votre stockage dans un conteneur ou sur une machine dédiée.
+>    - Idéalement, exécutez votre stockage dans un conteneur ou sur une machine dédiée.
 
-Traduit avec www.DeepL.com/Translator (version gratuite)
+<br />
 
-### Notes importantes
+### **Notes importantes**
 
 - RemoteStorage nécessite un domaine dédié, il faut donc en obtenir un et l'ajouter en utilisant le panneau d'administration de YunoHost. **Domaines -> Ajouter un domaine**. 
 - Comme RemoteStorage utilise le domaine complet et est installé à la racine, vous pouvez créer un sous-domaine tel que remote.domain.tld. 
