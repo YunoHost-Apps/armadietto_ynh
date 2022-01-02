@@ -19,7 +19,7 @@ server = new Armadietto({
     key: '/etc/yunohost/certs/__DOMAIN__/key.pem'
   },
   allow: {
-    signup: __SIGNUP__
+    signup: __IS_SIGNUP__
   },
   cacheViews: false
 });
