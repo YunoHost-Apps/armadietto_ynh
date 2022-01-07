@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 [Armadietto](https://github.com/remotestorage/armadietto/) is a [remoteStorage](https://remotestorage.io) server written for Node.js.
 
-Armadietto is maintained by the remoteStorage community. ([IRC](https://web.libera.chat/#remotestorage), [forums](https://community.remotestorage.io/))
+Armadietto is maintained by remoteStorage Team [IRC](https://kiwiirc.com/client/irc.freenode.net/#remotestorage)
 
 > ### :warning: WARNING
 > Please do not consider `armadietto` production ready, this project is still
