@@ -12,7 +12,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=1
+ynh_script_progression --message="Loading installation settings..." --weight=2
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -37,7 +37,7 @@ fi
 #=================================================
 # STOP AND REMOVE SERVICE
 #=================================================
-ynh_script_progression --message="Stopping and removing the systemd service..." --weight=1
+ynh_script_progression --message="Stopping and removing the systemd service..." --weight=2
 
 # Remove the dedicated systemd config
 ynh_remove_systemd_config
@@ -53,7 +53,7 @@ ynh_remove_logrotate
 #=================================================
 # REMOVE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Removing app main directory..." --weight=1
+ynh_script_progression --message="Removing app main directory..." --weight=2
 
 # Remove the app directory securely
 ynh_secure_remove --file="$final_path"
@@ -80,7 +80,7 @@ ynh_remove_nginx_config
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Removing dependencies..." --weight=1
+ynh_script_progression --message="Removing dependencies..." --weight=2
 
 ynh_remove_nodejs --nodejs_version=$NODEJS_VERSION
 

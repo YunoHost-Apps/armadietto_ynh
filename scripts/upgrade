@@ -20,18 +20,21 @@ domain=$(ynh_app_setting_get --app=$app --key=domain)
 port=$(ynh_app_setting_get --app=$app --key=port)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-is_signup=$(ynh_app_setting_get --app=$app --key=signup)
+is_signup=$(ynh_app_setting_get --app=$app --key=is_signup)
 
 #=================================================
 # CHECK VERSION
 #=================================================
+ynh_script_progression --message="Checking version..." --weight=1
+
+upgrade_type=$(ynh_check_app_version_changed)
 
 upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=1
+ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=4
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -56,17 +59,21 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
+
+# Remove old log file
+ynh_secure_remove --file="/var/log/$app/"
+
 #
 # N.B. : the followings setting migrations snippets are provided as *EXAMPLES*
 # of what you may want to do in some cases (e.g. a setting was not defined on
 # some legacy installs and you therefore want to initiaze stuff during upgrade)
 #
-
-# If db_name doesn't exist, create it
-#if [ -z "$db_name" ]; then
-#	db_name=$(ynh_sanitize_dbid --db_name=$app)
-#	ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-#fi
 
 # If final_path doesn't exist, create it
 #if [ -z "$final_path" ]; then
@@ -115,15 +122,26 @@ chmod 400 "$final_path/config.yml"
 chown $app:$app "$final_path/config.yml"
 
 #=================================================
+# CREATE DATA DIRECTORY
+#=================================================
+if [ -z "$datadir" ]; then
+	ynh_script_progression --message="Creating a data directory..." --weight=1
+
+	ynh_app_setting_set --app=$app --key=datadir --value=$datadir
+
+	# Create app data folder
+	mkdir -p $datadir
+fi
+
+#=================================================
 # DEFINE ARMADIETTO OPTIONS & CREATE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Configuring armadietto as a service..." --weight=1
+ynh_script_progression --message="Configuring armadietto as a service..." --weight=2
 
 # Define armadietto module path
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_add_config --template="../conf/server.js" --destination="$final_path/server.js"
-
 chmod 400 "$final_path/server.js"
 chown $app:$app "$final_path/server.js"
 
@@ -142,7 +160,12 @@ fi
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Updating a configuration file..." --weight=1
+ynh_script_progression --message="Updating a configuration file..." --weight=2
+
+ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
+
+chmod 400 "$final_path/config.yml"
+chown $app:$app "$final_path/config.yml"
 
 ### Same as during install
 ###
@@ -167,7 +190,7 @@ ynh_script_progression --message="Updating a configuration file..." --weight=1
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
+ynh_script_progression --message="Upgrading systemd configuration..." --weight=3
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
@@ -177,7 +200,7 @@ ynh_add_systemd_config
 #=================================================
 # SETUP LOGROTATE
 #=================================================
-ynh_script_progression --message="Configuring log rotation..." --weight=1
+ynh_script_progression --message="Configuring log rotation..." --weight=2
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate
@@ -197,19 +220,12 @@ chown -R $app:www-data "$final_path"
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
-
-#=================================================
-# START SYSTEMD SERVICE
-#=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
-
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
+ynh_script_progression --message="Reloading NGINX web server..." --weight=2
 
 ynh_systemd_action --service_name=nginx --action=reload
 
@@ -224,5 +240,4 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 #=================================================
 # END OF SCRIPT
 #=================================================
-
 ynh_script_progression --message="Upgrade of $app completed" --last

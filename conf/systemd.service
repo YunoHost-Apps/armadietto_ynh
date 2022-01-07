@@ -1,5 +1,5 @@
 [Unit]
-Description=Armadietto is a remoteStorage server written in nodejs
+Description=Armadietto, a remoteStorage server service
 After=network.target
 
 [Service]

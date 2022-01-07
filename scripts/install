@@ -37,9 +37,10 @@ datadir="/home/yunohost.app/${app}/storage"
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..." --weight=1
+ynh_script_progression --message="Validating installation parameters..." --weight=2
 
 final_path=/opt/yunohost/$app
+
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
 # Only on / directory
@@ -65,7 +66,7 @@ ynh_app_setting_set --app=$app --key=is_signup --value=$is_signup
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Finding an available port..." --weight=1
+ynh_script_progression --message="Finding an available port..." --weight=2
 
 # Find an available port
 port=$(ynh_find_port --port=8008)
@@ -74,7 +75,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=4
+ynh_script_progression --message="Installing dependencies..." --weight=23
 
 ynh_install_nodejs --nodejs_version=$NODEJS_VERSION
 ynh_use_nodejs
@@ -100,7 +101,7 @@ ynh_add_nginx_config
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
+ynh_script_progression --message="Configuring system user..." --weight=2
 
 # Create a system user
 ynh_system_user_create --username=$app
@@ -108,7 +109,7 @@ ynh_system_user_create --username=$app
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
 
@@ -118,7 +119,7 @@ chown $app:$app "$final_path/config.yml"
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --weight=3
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
@@ -140,7 +141,7 @@ chown -R $app:www-data "$datadir"
 #=================================================
 # SETUP ARMADIETTO AS A SERVICE
 #=================================================
-ynh_script_progression --message="Configuring armadietto as a service..." --weight=1
+ynh_script_progression --message="Creating a data directory..." --weight=1
 
 # Define armadietto module path
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
@@ -184,12 +185,12 @@ chown -R $app:www-data "$final_path"
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
+yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions..." --weight=1
+ynh_script_progression --message="Configuring permissions..." --weight=2
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]

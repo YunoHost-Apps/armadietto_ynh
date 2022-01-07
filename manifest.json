@@ -6,7 +6,7 @@
         "en": "RemoteStorage server written for Node.js",
         "fr": "Serveur remoteStorage écrit pour node.js"
     },
-    "version": "0.0.2-beta.10~ynh3",
+    "version": "0.0.2~ynh6",
     "url": "https://github.com/remotestorage/armadietto",
     "upstream": {
         "license": "MIT",

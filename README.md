@@ -15,16 +15,30 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-## TODO
 
-Une description longue de ce que fait l'application
+[Armadietto](https://github.com/remotestorage/armadietto/) is a [remoteStorage](https://remotestorage.io) server written for Node.js.
+
+Armadietto is maintained by remoteStorage Team [IRC](https://kiwiirc.com/client/irc.freenode.net/#remotestorage)
+
+> ### :warning: WARNING
+> Please do not consider `armadietto` production ready, this project is still
+> considered experimental.  As with any alpha-stage storage technology, you
+> MUST expect that it will eat your data and take precautions against this. You
+> SHOULD expect that its APIs and storage schemas will change before it is
+> labelled stable.
+
+**Shipped version:** 0.1.5
+
+### Application for remoteStorage
+
+[Click here](https://remotestorage.io/apps/) to see the list of applications that can be used with RemoteStorage.
 
 ### Features
 
 - liste des caractéristiques...
 
 
-**Shipped version:** 0.0.2-beta.10~ynh3
+**Shipped version:** 0.0.2~ynh6
 
 
 
@@ -34,22 +48,50 @@ Une description longue de ce que fait l'application
 
 ## Disclaimers / important information
 
+### :warning: WARNING
+Armadietto_ynh still in develoment:
+
+* Security considerations from [Armadietto](https://github.com/remotestorage/armadietto/) :
+
+
+>### **Storage security**
+>
+>In production, we recommend that you restrict access to the files managed by your armadietto server as much as possible. This is particularly true if you host your storage on a machine with other web applications; you need to protect your files in the event that one of those apps is exploited.
+>
+>You should take these steps to keep your storage safe:
+>
+>    - Pick a unique Unix user to run your server process; no other process on the box should run as this user: sudo useradd armadietto --system --no-create-home
+>
+>    - Do not run other applications as root, or as any user that could access files owned by your armadietto user
+>
+>    - Make sure the directory path/to/storage cannot be read, written or executed by anyone but this user: sudo chmod 0700 /path/to/storage && sudo chown armadietto /path/to/storage
+>
+>    - Do not run armadietto as root; if you need to bind to port 80 or 443 use a reverse proxy like nginx, Apache2, caddy, lighttpd or enable bind capability: setcap 'cap_net_bind_service=+ep' `which armadietto`
+>
+>    - Ideally, run your storage inside a container or on a dedicated machine
+
+<br />
+
+### **Important Notes**
+
+- RemoteStorage requires a dedicated domain, so obtain one and add it using the YunoHost admin panel. **Domains -> Add domain**. 
+- As RemoteStorage uses the full domain and is installed on the root, you can create a subdomain such as remote.domain.tld. 
+- Don't forget to update your DNS if you manage them manually.
+
+- RemoteStorage requires browser-approved SSL certificates. If you have certificates not issued by [Let's Encrypt](https://letsencrypt.org/), install them manually as usual.
+
 ## TODO
 
-* Toute limitation ou contrainte connue ou tout élément ne fonctionnant pas, tel que (mais non limité à) :
-    * nécessitant un domaine dédié complet ?
-    * architectures non prises en charge ?
-    * L'authentification unique ou l'intégration LDAP ne fonctionnent pas ?
-    * l'application nécessite une quantité importante de RAM / disque / ... pour s'installer ou fonctionner correctement.
+* Any known limitations, constraints or non-functioning elements, such as (but not limited to) :
+    * Unsupported architectures?
+    * Single sign-on or LDAP integration not working?
     * etc...
 
-* D'autres informations que les gens devraient connaître, comme.. :
-    * toute étape spécifique à effectuer après l'installation (comme terminer manuellement l'installation, des identifiants d'administration spécifiques, ...)
-    * Comment configurer / administrer l'application si ce n'est pas évident.
-    * le processus de mise à niveau, les spécificités, les choses à savoir ?
-    * Considérations de sécurité
+* Other information that people should know, such as. :
+    * any specific steps to be performed after installation (like manually terminating the installation, specific admin credentials, ...)
+    * How to configure / administer the application if it is not obvious.
+    * Specifics, things to know?
 
-Traduit avec www.DeepL.com/Translator (version gratuite)
 ## Documentation and resources
 
 * Official app website: https://remotestorage.io/
