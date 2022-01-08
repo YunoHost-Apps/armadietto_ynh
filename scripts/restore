@@ -114,7 +114,8 @@ ynh_script_progression --message="Secure files and directories" --weight=1
 
 # Set permissions to app files
 chown -R $app:$app "$final_path"
-chmod 0700 $datadir && chown $app:$app $datadir
+chmod 0700 $datadir
+chown $app:$app $datadir
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
