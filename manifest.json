@@ -3,8 +3,8 @@
     "id": "armadietto",
     "packaging_format": 1,
     "description": {
-        "en": "A remoteStorage server written for Node.js.",
-        "fr": "Un serveur remoteStorage écrit pour node.js."
+        "en": "A remoteStorage server running as a nodejs web service with systemd",
+        "fr": "Un serveur remoteStorage excécuté en tant que service web nodejs par systemd"
     },
     "version": "0.0.2~ynh6",
     "url": "https://github.com/remotestorage/armadietto",
@@ -31,12 +31,6 @@
             {
                 "name": "domain",
                 "type": "domain"
-            },
-            {
-                "name": "path",
-                "type": "path",
-                "example": "/",
-                "default": "/"
             },
             {
                 "name": "is_public",
