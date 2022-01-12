@@ -14,7 +14,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 [Armadietto](https://github.com/remotestorage/armadietto/) est un serveur [remoteStorage](https://remotestorage.io) écrit pour Node.js.
 
-Armadietto est maintenu par l'équipe remoteStorage [IRC](https://kiwiirc.com/client/irc.freenode.net/#remotestorage).
+Armadietto est maintenu par la communauté remoteStorage, ([IRC](https://web.libera.chat/#remotestorage), [forums](https://community.remotestorage.io/)).
 
 > ### :warning: WARNING
 > Veuillez ne pas considérer `armadietto` comme prêt pour la production, ce projet est toujours
@@ -40,13 +40,11 @@ Armadietto est maintenu par l'équipe remoteStorage [IRC](https://kiwiirc.com/cl
 ## Avertissements / informations importantes
 
 ### :warning: WARNING
-Armadietto_ynh still in develoment:
+Le paquet Armadietto_ynh est toujours en cours de développement, vous devez donc vous attendre à d'éventuels changements non documentés avant qu'il ne soit qualifié de stable.
 
-* l'authentification unique ou l'intégration LDAP ne fonctionne pas ?
-* Considérations sur la sécurité de [Armadietto](https://github.com/remotestorage/armadietto/) :
+### :information_source: Considérations sur la sécurité de [Armadietto](https://github.com/remotestorage/armadietto/) :
 
-
-> ### **Sécurité du stockage**
+> #### **Sécurité du stockage**
 > 
 > En production, nous vous recommandons de restreindre autant que possible l'accès aux fichiers gérés par votre serveur armadietto. Ceci est particulièrement vrai si vous hébergez votre stockage sur une machine avec d'autres applications web ; vous devez protéger vos fichiers dans le cas où l'une de ces applications serait exploitée.
 > 
