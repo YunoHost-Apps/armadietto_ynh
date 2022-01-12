@@ -1,11 +1,9 @@
 ### :warning: WARNING
-Armadietto_ynh still in develoment:
+Le paquet Armadietto_ynh est toujours en cours de développement, vous devez donc vous attendre à d'éventuels changements non documentés avant qu'il ne soit qualifié de stable.
 
-* l'authentification unique ou l'intégration LDAP ne fonctionne pas ?
-* Considérations sur la sécurité de [Armadietto](https://github.com/remotestorage/armadietto/) :
+### :information_source: Considérations sur la sécurité de [Armadietto](https://github.com/remotestorage/armadietto/) :
 
-
-> ### **Sécurité du stockage**
+> #### **Sécurité du stockage**
 > 
 > En production, nous vous recommandons de restreindre autant que possible l'accès aux fichiers gérés par votre serveur armadietto. Ceci est particulièrement vrai si vous hébergez votre stockage sur une machine avec d'autres applications web ; vous devez protéger vos fichiers dans le cas où l'une de ces applications serait exploitée.
 > 
