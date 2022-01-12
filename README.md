@@ -34,8 +34,7 @@ Armadietto is maintained by the remoteStorage community, ([IRC](https://web.libe
 [Click here](https://remotestorage.io/apps/) to see the list of applications that can be used with RemoteStorage.
 
 
-
-**Shipped version:** 0.0.2~ynh6
+**Shipped version:** 0.0.3~ynh2
 
 
 

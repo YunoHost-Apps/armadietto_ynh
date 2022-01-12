@@ -1,0 +1,25 @@
+[is_signup]
+name = "Signup activation"
+description = "Allow visitors to register and create an account?"
+command = "/bin/bash scripts/actions/is_signup"
+accepted_return_codes = [0] 
+
+    # [is_signup.arguments]
+    #     [is_signup.arguments.is_signup]
+    #     type = "boolean"
+    #     ask.en = "Allow signup?"
+    #     # default = false
+
+
+[public_private]
+name = "Private / Public"
+description = "TODO"
+command = "/bin/bash scripts/actions/public_private"
+accepted_return_codes = [0]     
+
+
+    [public_private.arguments]
+        [public_private.arguments.is_public]
+        type = "boolean"
+        ask.en = "Is it a public app?"
+        default = true
