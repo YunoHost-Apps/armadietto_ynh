@@ -6,8 +6,8 @@ After=network.target
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__FINALPATH__/
-ExecStart=__YNH_NODE__ __FINALPATH__/server
+WorkingDirectory=__FINAL_PATH__/
+ExecStart=__YNH_NODE__ __FINAL_PATH__/server
 Restart=always
 Environment=__YNH_NODE_LOAD_PATH__
 Environment=NODE_ENV=production

@@ -93,8 +93,6 @@ ynh_system_user_create --username=$app
 ynh_script_progression --message="Setting up and create final app path..." --weight=1
 
 ynh_app_setting_set $app final_path $final_path
-# Download, check integrity, uncompress and patch the source from app.src
-# ynh_setup_source --dest_dir="$final_path"
 
 # Create final_path
 mkdir -p "$final_path"
@@ -114,10 +112,10 @@ ynh_use_nodejs
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=2
 
-ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
+# ynh_add_config --template="../conf/config.yml" --destination="$final_path/config.yml"
 
-chmod 400 "$final_path/config.yml"
-chown $app:$app "$final_path/config.yml"
+# chmod 400 "$final_path/config.yml"
+# chown $app:$app "$final_path/config.yml"
 
 #=================================================
 # CREATE DATA DIRECTORY
@@ -162,10 +160,10 @@ fi
 #=================================================
 ynh_script_progression --message="Updating a configuration file..." --weight=2
 
-ynh_add_config --template="../conf/config.sample.yml" --destination="$final_path/config.yml"
+# ynh_add_config --template="../conf/config.yml" --destination="$final_path/config.yml"
 
-chmod 400 "$final_path/config.yml"
-chown $app:$app "$final_path/config.yml"
+# chmod 400 "$final_path/config.yml"
+# chown $app:$app "$final_path/config.yml"
 
 ### Same as during install
 ###

@@ -25,11 +25,16 @@ Armadietto est maintenu par la communauté remoteStorage, ([IRC](https://web.lib
 
 **Version livrée:** 0.1.5
 
+### Option d'installation 
+
+L'inscription des utilisateurs n'est pas autorisée par défault.
+Cette option peut être activée via le panneau de configutration.
+
 ### Application pour remoteStorage
 
-[Cliquez ici](https://remotestorage.io/apps/) pour voir la liste des applications qui peuvent être utilisées avec RemoteStorage.
+[Cliquez ici](https://remotestorage.io/apps/) pour voir une liste non exhaustive d'applications ayant intégré remoteStorage comme option de stockage/synchronisation.
 
-**Version incluse :** 0.0.2~ynh6
+**Version incluse :** 0.0.5~ynh1
 
 
 
