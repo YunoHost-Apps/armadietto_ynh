@@ -5,7 +5,7 @@ name = "Armadietto configuration"
 
     [main.global_config]
     name = "Access options"
-    services = ["nginx", "__APP__"]
+    services = ["__APP__"]
 
         [main.global_config.is_signup]
         ask = "Allow signups?"

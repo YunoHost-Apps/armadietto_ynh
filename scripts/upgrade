@@ -57,6 +57,12 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
+# If is_signup doesn't exist, create it
+if [ -z "$is_signup" ]; then
+	is_signup="true"
+	ynh_app_setting_set --app=$app --key=is_signup --value=$is_signup
+fi
+
 # Cleaning legacy permissions
 if ynh_legacy_permissions_exists; then
 	ynh_legacy_permissions_delete_all
