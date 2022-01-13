@@ -40,7 +40,6 @@ This option can be enabled in the configuration panel.
 
 
 
-
 **Shipped version:** 0.0.5~ynh1
 
 
