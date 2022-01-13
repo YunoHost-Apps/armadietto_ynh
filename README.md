@@ -29,12 +29,19 @@ Armadietto is maintained by the remoteStorage community, ([IRC](https://web.libe
 
 **Shipped version:** 0.1.5
 
+### Installation option 
+
+User registration is not allowed out of the box.
+This option can be enabled in the configuration panel.
+
 ### Application for remoteStorage
 
-[Click here](https://remotestorage.io/apps/) to see the list of applications that can be used with RemoteStorage.
+[Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**Shipped version:** 0.0.3~ynh2
+
+
+**Shipped version:** 0.0.5~ynh1
 
 
 
