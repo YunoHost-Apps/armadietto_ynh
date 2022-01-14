@@ -34,9 +34,7 @@ Cette option peut être activée via le panneau de configutration.
 
 [Cliquez ici](https://remotestorage.io/apps/) pour voir une liste non exhaustive d'applications ayant intégré remoteStorage comme option de stockage/synchronisation.
 
-**Version incluse :** 0.0.5~ynh1
-
-
+**Version incluse :** 0.0.6~ynh1
 
 ## Captures d'écran
 
