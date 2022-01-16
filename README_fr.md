@@ -36,6 +36,8 @@ Cette option peut être activée via le panneau de configutration.
 
 **Version incluse :** 0.0.6~ynh1
 
+
+
 ## Captures d'écran
 
 ![](./doc/screenshots/armadietto.png)
