@@ -3,13 +3,15 @@ version = "1.0"
 [main]
 name = "Settings"
 
-    [main.global_config]
-    name = "Access options"
+    [main.is_signup]
+    name = "Signup configuration"
 
-    services = ["nginx", "__APP__"]
+    services = ["__APP__"]
 
-        [main.global_config.is_signup]
+        [main.is_signup.is_signup]
         ask = "Allow signups?"
         type = "boolean"
+        yes = '1'
+        no = ''
         help = "Would you like to allow visitors to register and create an account?"
-        bind = "signup:__FINALPATH__/server.js"
+        bind = "signup:/opt/yunohost/__APP__/server.js"

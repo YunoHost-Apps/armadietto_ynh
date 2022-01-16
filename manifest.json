@@ -6,7 +6,7 @@
         "en": "A remoteStorage server running as a nodejs web service with systemd",
         "fr": "Un serveur remoteStorage excécuté en tant que service web nodejs par systemd"
     },
-    "version": "0.0.5~ynh1",
+    "version": "0.0.6~ynh1",
     "url": "https://github.com/remotestorage/armadietto",
     "upstream": {
         "license": "MIT",
@@ -40,6 +40,19 @@
                     "en": "Would you like to restrein the access to this web site?",
                     "fr": "Souhaitez-vous limiter l'accès à ce site web ?"
                 }
+            },
+            {
+                "name": "is_signup",
+                "type": "boolean",
+                "ask": {
+					"en": "Allow signups?",
+					"fr": "Accepter les inscriptions ?"
+                },
+                "help": {
+                    "en": "Would you like to allow visitors to register and create an account?",
+                    "fr": "Souhaitez-vous autoriser les visiteurs à s'inscrire et créer un compte ?"
+                },
+                "default": false
             }
         ]
     }
