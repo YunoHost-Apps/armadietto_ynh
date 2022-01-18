@@ -27,7 +27,7 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
-is_signup="0"
+is_signup=$YNH_APP_ARG_IS_SIGNUP
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -100,16 +100,6 @@ ynh_script_progression --message="Configuring system user..." --weight=2
 
 # Create a system user
 ynh_system_user_create --username=$app
-
-#=================================================
-# ADD A CONFIGURATION
-#=================================================
-ynh_script_progression --message="Adding a configuration file..." --weight=1
-
-# ynh_add_config --template="../conf/config.yml" --destination="$final_path/config.yml"
-
-# chmod 400 "$final_path/config.yml"
-# chown $app:$app "$final_path/config.yml"
 
 #=================================================
 # SETUP SYSTEMD

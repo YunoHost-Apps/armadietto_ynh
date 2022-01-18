@@ -57,7 +57,6 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
-
 # If is_signup doesn't exist, create it
 if [ -z "$is_signup" ]; then
 	is_signup="true"
@@ -114,16 +113,6 @@ ynh_use_nodejs
 #=================================================
 # SPECIFIC UPGRADE
 #=================================================
-# ADD A CONFIGURATION
-#=================================================
-ynh_script_progression --message="Adding a configuration file..." --weight=2
-
-# ynh_add_config --template="../conf/config.yml" --destination="$final_path/config.yml"
-
-# chmod 400 "$final_path/config.yml"
-# chown $app:$app "$final_path/config.yml"
-
-#=================================================
 # CREATE DATA DIRECTORY
 #=================================================
 
@@ -162,36 +151,6 @@ then
 fi
 
 #=================================================
-# UPDATE A CONFIG FILE
-#=================================================
-ynh_script_progression --message="Updating a configuration file..." --weight=2
-
-# ynh_add_config --template="../conf/config.yml" --destination="$final_path/config.yml"
-
-# chmod 400 "$final_path/config.yml"
-# chown $app:$app "$final_path/config.yml"
-
-### Same as during install
-###
-### The file will automatically be backed-up if it's found to be manually modified (because
-### ynh_add_config keeps track of the file's checksum)
-
-# ynh_add_config --template="some_config_file" --destination="$final_path/some_config_file"
-
-# FIXME: this should be handled by the core in the future
-# You may need to use chmod 600 instead of 400,
-# for example if the app is expected to be able to modify its own config
-# chmod 400 "$final_path/some_config_file"
-# chown $app:$app "$final_path/some_config_file"
-
-### For more complex cases where you want to replace stuff using regexes,
-### you shoud rely on ynh_replace_string (which is basically a wrapper for sed)
-### When doing so, you also need to manually call ynh_store_file_checksum
-###
-### ynh_replace_string --match_string="match_string" --replace_string="replace_string" --target_file="$final_path/some_config_file"
-### ynh_store_file_checksum --file="$final_path/some_config_file"
-
-#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Upgrading systemd configuration..." --weight=3
@@ -216,7 +175,8 @@ ynh_script_progression --message="Secure files and directories" --weight=1
 
 # Set permissions to app files
 chown -R $app:$app "$final_path"
-chmod 0700 $datadir && chown $app:$app $datadir
+chmod 0700 "$datadir"
+chown $app:$app "$datadir"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
