@@ -1,14 +1,13 @@
 ### :warning: WARNING
-Armadietto_ynh still in develoment:
+The Armadietto_ynh package is still under development, so you should expect some undocumented changes before it is labeled stable.
 
-* Security considerations from [Armadietto](https://github.com/remotestorage/armadietto/) :
+### :information_source: Security considerations from [Armadietto](https://github.com/remotestorage/armadietto/) :
 
-
->### **Storage security**
+> #### **Storage security**
 >
->In production, we recommend that you restrict access to the files managed by your armadietto server as much as possible. This is particularly true if you host your storage on a machine with other web applications; you need to protect your files in the event that one of those apps is exploited.
+> In production, we recommend that you restrict access to the files managed by your armadietto server as much as possible. This is particularly true if you host your storage on a machine with other web applications; you need to protect your files in the event that one of those apps is exploited.
 >
->You should take these steps to keep your storage safe:
+> You should take these steps to keep your storage safe:
 >
 >    - Pick a unique Unix user to run your server process; no other process on the box should run as this user: sudo useradd armadietto --system --no-create-home
 >

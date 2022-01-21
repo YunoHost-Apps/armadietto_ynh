@@ -1,16 +1,17 @@
 version = "1.0"
-name= "Armadietto configuration panel"
 
 [main]
-name = "Armadietto signup configuration"
+name = "Settings"
 
     [main.is_signup]
     name = "Signup configuration"
 
-        [main.is_signup.signup]
-        ask.en = "Allow signups?"
-        ask.fr = "Accepter les inscriptions ?"
+    services = ["__APP__"]
+
+        [main.is_signup.is_signup]
+        ask = "Allow signups?"
         type = "boolean"
-        default = true
-        help.en = "Would you like to allow visitors to register and create an account?"
-        help.fr = "Souhaitez-vous autoriser les visiteurs à s'inscrire et créer un compte ?"    
+        yes = '1'
+        no = ''
+        help = "Would you like to allow visitors to register and create an account?"
+        bind = "signup:/opt/yunohost/__APP__/server.js"
