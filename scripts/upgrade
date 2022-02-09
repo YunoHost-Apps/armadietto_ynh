@@ -143,10 +143,10 @@ chown $app:$app "$final_path/server.js"
 #=================================================
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	ynh_script_progression --message="Upgrade armadietto with npm..." --weight=1
+	ynh_script_progression --message="Upgrade to armadietto@0.1.5 with npm..." --weight=1
 
 	pushd $final_path
-		ynh_npm -g i armadietto
+		ynh_npm -g i armadietto@0.1.5
 	popd
 fi
 
