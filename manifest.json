@@ -6,7 +6,7 @@
         "en": "A remoteStorage server running as a nodejs web service with systemd",
         "fr": "Un serveur remoteStorage excécuté en tant que service web nodejs par systemd"
     },
-    "version": "0.0.6~ynh1",
+    "version": "0.0.7~ynh1",
     "url": "https://github.com/remotestorage/armadietto",
     "upstream": {
         "license": "MIT",
