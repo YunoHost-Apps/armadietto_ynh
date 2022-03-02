@@ -146,7 +146,7 @@ then
 	ynh_script_progression --message="Upgrade armadietto with npm..." --weight=1
 
 	pushd $final_path
-		ynh_npm -g i armadietto@0.1.5
+		ynh_npm -g i armadietto@0.2.0
 	popd
 fi
 
