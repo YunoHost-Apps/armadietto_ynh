@@ -17,7 +17,7 @@ old_domain=$YNH_APP_OLD_DOMAIN
 old_path=$YNH_APP_OLD_PATH
 
 new_domain=$YNH_APP_NEW_DOMAIN
-new_path=$YNH_APP_NEW_PATH
+new_path="/"
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -29,6 +29,11 @@ ynh_script_progression --message="Loading installation settings..." --weight=2
 # Needed for helper "ynh_add_nginx_config"
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
+# Add settings here as needed by your application
+port=$(ynh_app_setting_get --app=$app --key=port)
+datadir=$(ynh_app_setting_get --app=$app --key=datadir)
+is_signup=$(ynh_app_setting_get --app=$app --key=is_signup)
+
 #=================================================
 # BACKUP BEFORE CHANGE URL THEN ACTIVE TRAP
 #=================================================
@@ -37,6 +42,7 @@ ynh_script_progression --message="Backing up the app before changing its URL (ma
 # Backup the current version of the app
 ynh_backup_before_upgrade
 ynh_clean_setup () {
+	ynh_clean_check_starting
 	# Remove the new domain config file, the remove script won't do it as it doesn't know yet its location.
 	ynh_secure_remove --file="/etc/nginx/conf.d/$new_domain.d/$app.conf"
 
@@ -103,8 +109,19 @@ fi
 #=================================================
 # SPECIFIC MODIFICATIONS
 #=================================================
-# ...
+# UPDATE A CONFIG FILE
 #=================================================
+ynh_script_progression --message="Updating a configuration file..." --weight=2
+
+domain=$new_domain
+ynh_use_nodejs
+# Define armadietto module path
+module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+
+ynh_add_config --template="../conf/server.js" --destination="$final_path/server.js"
+
+chmod 400 "$final_path/server.js"
+chown $app:$app "$final_path/server.js"
 
 #=================================================
 # GENERIC FINALISATION
@@ -113,6 +130,7 @@ fi
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
+# Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
 
 #=================================================
@@ -123,14 +141,7 @@ ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
-# RESTART ARMADIETTO
-#=================================================
-ynh_script_progression --message="Start armadietto web server..." --weight=1
-
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
 # END OF SCRIPT
 #=================================================
+
 ynh_script_progression --message="Change of URL completed for $app" --last
