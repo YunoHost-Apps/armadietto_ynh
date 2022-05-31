@@ -12,12 +12,12 @@ server = new Armadietto({
   http: {
     port: __PORT__
   },
-  https: {
-    force: true,
-    port: __PORT__,
-    cert: '/etc/yunohost/certs/__DOMAIN__/crt.pem',
-    key: '/etc/yunohost/certs/__DOMAIN__/key.pem'
-  },
+  // https: {
+  //   force: true,
+  //   port: __PORT__,
+  //   cert: '/etc/yunohost/certs/__DOMAIN__/crt.pem',
+  //   key: '/etc/yunohost/certs/__DOMAIN__/key.pem'
+  // },
   allow: {
     signup: __IS_SIGNUP__
   },
