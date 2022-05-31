@@ -40,7 +40,8 @@ Cette option peut être activée via le panneau de configutration.
 
 ## Captures d'écran
 
-![Capture d'écran de Armadietto](./doc/screenshots/armadietto.png)
+![Capture d'écran de Armadietto](./doc/screenshots/armadietto-welcome.png)
+![Capture d'écran de Armadietto](./doc/screenshots/armadietto-signup.png)
 
 ## Avertissements / informations importantes
 
