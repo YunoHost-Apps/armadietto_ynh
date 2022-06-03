@@ -28,16 +28,3 @@ Le paquet Armadietto_ynh est toujours en cours de développement, vous devez don
 - N'oubliez pas de mettre à jour vos DNS si vous les gérez manuellement.
 
 - RemoteStorage nécessite des certificats SSL approuvés par le navigateur. Si vous disposez de certificats qui ne sont pas émis par [Let's Encrypt](https://letsencrypt.org/), installez-les manuellement comme d'habitude.
-
-
-## TODO
-
-* Toute limitation ou contrainte connue ou tout élément ne fonctionnant pas, tel que (mais non limité à) :
-    * architectures non prises en charge ?
-    * L'authentification unique ou l'intégration LDAP ne fonctionnent pas ?
-    * etc...
-
-* D'autres informations que les gens devraient connaître, comme.. :
-    * toute étape spécifique à effectuer après l'installation (comme terminer manuellement l'installation, des identifiants d'administration spécifiques, ...)
-    * Comment configurer / administrer l'application si ce n'est pas évident.
-    * Spécificités, les choses à savoir ?

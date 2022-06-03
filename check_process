@@ -1,26 +1,21 @@
-# See here for more information
-# https://github.com/YunoHost/package_check#syntax-check_process-file
-
-# Move this file from check_process.default to check_process when you have filled it.
-
 ;; Test complet
 	; Manifest
 		domain="domain.tld"
-		path="/"
-		admin="armadietto"
-		language="fr"
 		is_public=1
 		is_signup=0
-		port="8008"
 	; Checks
 		pkg_linter=1
+		setup_sub_dir=0
 		setup_root=1
+		setup_nourl=0
 		setup_private=1
 		setup_public=1
 		upgrade=1
 		# 0.0.2~ynh5 
 		upgrade=1	from_commit=d185b84698a9f7e83eff6bf6dd5606f35282a536
 		backup_restore=1
+		multi_instance=0
+		port_already_use=0
 		change_url=1
 ;;; Options
 Email=

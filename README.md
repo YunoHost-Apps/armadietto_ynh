@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # Armadietto for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Working status](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)  
 [![Install Armadietto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -14,7 +14,6 @@ It shall NOT be edited by hand.
 If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
 
 ## Overview
-
 
 [Armadietto](https://github.com/remotestorage/armadietto/) is a [remoteStorage](https://remotestorage.io) server written for Node.js.
 
@@ -27,8 +26,6 @@ Armadietto is maintained by the remoteStorage community, ([IRC](https://web.libe
 > SHOULD expect that its APIs and storage schemas will change before it is
 > labelled stable.
 
-**Shipped version:** 0.1.5
-
 ### Installation option 
 
 User registration is not allowed out of the box.
@@ -39,14 +36,11 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-
-**Shipped version:** 0.0.7~ynh1
-
-
+**Shipped version:** 0.1.5~ynh1
 
 ## Screenshots
 
-![](./doc/screenshots/armadietto.png)
+![Screenshot of Armadietto](./doc/screenshots/armadietto.png)
 
 ## Disclaimers / important information
 
@@ -81,34 +75,23 @@ The Armadietto_ynh package is still under development, so you should expect some
 
 - RemoteStorage requires browser-approved SSL certificates. If you have certificates not issued by [Let's Encrypt](https://letsencrypt.org/), install them manually as usual.
 
-## TODO
-
-* Any known limitations, constraints or non-functioning elements, such as (but not limited to) :
-    * Unsupported architectures?
-    * Single sign-on or LDAP integration not working?
-    * etc...
-
-* Other information that people should know, such as. :
-    * any specific steps to be performed after installation (like manually terminating the installation, specific admin credentials, ...)
-    * How to configure / administer the application if it is not obvious.
-    * Specifics, things to know?
-
 ## Documentation and resources
 
-* Official app website: https://remotestorage.io/
-* Upstream app code repository: https://github.com/remotestorage/armadietto
-* YunoHost documentation for this app: https://yunohost.org/app_armadietto
-* Report a bug: https://github.com/YunoHost-Apps/armadietto_ynh/issues
+* Official app website: <https://remotestorage.io/>
+* Upstream app code repository: <https://github.com/remotestorage/armadietto>
+* YunoHost documentation for this app: <https://yunohost.org/app_armadietto>
+* Report a bug: <https://github.com/YunoHost-Apps/armadietto_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/armadietto_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/armadietto_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade armadietto -u https://github.com/YunoHost-Apps/armadietto_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>
