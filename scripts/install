@@ -14,8 +14,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
-	true
+	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -31,16 +30,12 @@ is_signup=$YNH_APP_ARG_IS_SIGNUP
 
 app=$YNH_APP_INSTANCE_NAME
 
-# Define app's data directory
-datadir="/home/yunohost.app/${app}/storage"
-
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
 ynh_script_progression --message="Validating installation parameters..." --weight=2
 
 final_path=/opt/yunohost/$app
-
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
@@ -54,7 +49,6 @@ ynh_script_progression --message="Storing installation settings..." --weight=1
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=is_signup --value=$is_signup
-ynh_app_setting_set --app=$app --key=datadir --value=$datadir
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -76,14 +70,25 @@ ynh_install_nodejs --nodejs_version=$NODEJS_VERSION
 ynh_use_nodejs
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Configuring system user..." --weight=2
+
+# Create a system user
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # CHECK AND CREATE FINAL_PATH
 #=================================================
 ynh_script_progression --message="Setting up and create final app path..." --weight=1
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
-
 # Create final_path
 mkdir -p "$final_path"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:$app "$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -94,35 +99,35 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 ynh_add_nginx_config
 
 #=================================================
-# CREATE DEDICATED USER
+# SPECIFIC SETUP
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=2
-
-# Create a system user
-ynh_system_user_create --username=$app
-
+# INSTALL ARMADIETTO
 #=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=3
+ynh_script_progression --message="Install armadietto with npm..." --weight=1
 
-# Create a dedicated systemd config
-ynh_add_systemd_config
+pushd $final_path
+	upstream_version=$(ynh_app_upstream_version)
+	ynh_npm -g i armadietto@$upstream_version
+popd
 
 #=================================================
 # CREATE DATA DIRECTORY
 #=================================================
 ynh_script_progression --message="Creating a data directory..." --weight=1
 
+datadir="/home/yunohost.app/${app}/storage"
 ynh_app_setting_set --app=$app --key=datadir --value=$datadir
 
-# Create app data folder
 mkdir -p $datadir
 
+chmod 750 "$datadir"
+chmod -R o-rwx "$datadir"
+chown -R $app:$app "$datadir"
+
 #=================================================
-# SETUP ARMADIETTO AS A SERVICE
+# ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring armadietto as a service..." --weight=2
+ynh_script_progression --message="Adding a configuration file..." --weight=2
 
 # Define armadietto module path
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
@@ -133,13 +138,12 @@ chmod 400 "$final_path/server.js"
 chown $app:$app "$final_path/server.js"
 
 #=================================================
-# INSTALL ARMADIETTO
+# SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Install armadietto with npm..." --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --weight=3
 
-pushd $final_path
-	ynh_npm -g i armadietto@0.1.5
-popd
+# Create a dedicated systemd config
+ynh_add_systemd_config
 
 #=================================================
 # GENERIC FINALIZATION
@@ -152,21 +156,19 @@ ynh_script_progression --message="Configuring log rotation..." --weight=1
 ynh_use_logrotate
 
 #=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Secure files and directories" --weight=1
-
-# Set permissions to app files
-chown -R $app:$app "$final_path"
-chmod 0700 "$datadir"
-chown $app:$app "$datadir"
-
-#=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
 yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..." --weight=1
+
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # SETUP SSOWAT
@@ -189,14 +191,7 @@ ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
-# START ARMADIETTO
-#=================================================
-ynh_script_progression --message="Start armadietto web server..." --weight=1
-
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
 # END OF SCRIPT
 #=================================================
+
 ynh_script_progression --message="Installation of $app completed" --last
