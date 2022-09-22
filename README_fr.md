@@ -36,11 +36,13 @@ Cette option peut être activée via le panneau de configutration.
 [Cliquez ici](https://remotestorage.io/apps/) pour voir une liste non exhaustive d'applications ayant intégré remoteStorage comme option de stockage/synchronisation.
 
 
-**Version incluse :** 0.1.5~ynh1
+**Version incluse :** 0.2.0~ynh1
+
 
 ## Captures d'écran
 
-![Capture d'écran de Armadietto](./doc/screenshots/armadietto.png)
+![Capture d'écran de Armadietto](./doc/screenshots/armadietto-welcome.png)
+![Capture d'écran de Armadietto](./doc/screenshots/armadietto-signup.png)
 
 ## Avertissements / informations importantes
 
