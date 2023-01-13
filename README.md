@@ -38,7 +38,6 @@ This option can be enabled in the configuration panel.
 
 **Shipped version:** 0.2.0~ynh1
 
-
 ## Screenshots
 
 ![Screenshot of Armadietto](./doc/screenshots/armadietto-welcome.png)
