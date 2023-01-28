@@ -5,15 +5,15 @@ It shall NOT be edited by hand.
 
 # Armadietto pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
 [![Installer Armadietto avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Armadietto rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Armadietto rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 [Armadietto](https://github.com/remotestorage/armadietto/) est un serveur [remoteStorage](https://remotestorage.io) écrit pour Node.js.
 
@@ -38,10 +38,10 @@ Cette option peut être activée via le panneau de configutration.
 
 **Version incluse :** 0.2.0~ynh2
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Armadietto](./doc/screenshots/armadietto-welcome.png)
-![Capture d'écran de Armadietto](./doc/screenshots/armadietto-signup.png)
+![Capture d’écran de Armadietto](./doc/screenshots/armadietto-welcome.png)
+![Capture d’écran de Armadietto](./doc/screenshots/armadietto-signup.png)
 
 ## Avertissements / informations importantes
 
@@ -78,8 +78,8 @@ Le paquet Armadietto_ynh est toujours en cours de développement, vous devez don
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://remotestorage.io/>
-* Dépôt de code officiel de l'app : <https://github.com/remotestorage/armadietto>
+* Site officiel de l’app : <https://remotestorage.io/>
+* Dépôt de code officiel de l’app : <https://github.com/remotestorage/armadietto>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_armadietto>
 * Signaler un bug : <https://github.com/YunoHost-Apps/armadietto_ynh/issues>
 
@@ -95,4 +95,4 @@ ou
 sudo yunohost app upgrade armadietto -u https://github.com/YunoHost-Apps/armadietto_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
