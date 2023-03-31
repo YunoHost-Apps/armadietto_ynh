@@ -12,7 +12,7 @@
 		setup_public=1
 		upgrade=1
 		# 0.0.2~ynh5 
-		upgrade=1	from_commit=d185b84698a9f7e83eff6bf6dd5606f35282a536
+		upgrade=1	from_commit=75b669baf73a507c9b22baf3280529cf7c1ee242
 		backup_restore=1
 		multi_instance=0
 		port_already_use=0
@@ -21,6 +21,6 @@
 Email=
 Notification=none
 ;;; Upgrade options
-	; commit=d185b84698a9f7e83eff6bf6dd5606f35282a536
+	; commit=75b669baf73a507c9b22baf3280529cf7c1ee242
 		name= Upgrade from version 0.0.2~ynh6
 		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&is_signup=0&port=8008&
