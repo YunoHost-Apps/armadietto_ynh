@@ -6,6 +6,7 @@ It shall NOT be edited by hand.
 # Armadietto for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Working status](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
+
 [![Install Armadietto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
 *[Lire ce readme en français.](./README_fr.md)*
