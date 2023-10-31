@@ -81,7 +81,7 @@ Le paquet Armadietto_ynh est toujours en cours de développement, vous devez don
 
 * Site officiel de l’app : <https://remotestorage.io/>
 * Dépôt de code officiel de l’app : <https://github.com/remotestorage/armadietto>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_armadietto>
+* YunoHost Store: <https://apps.yunohost.org/app/armadietto>
 * Signaler un bug : <https://github.com/YunoHost-Apps/armadietto_ynh/issues>
 
 ## Informations pour les développeurs

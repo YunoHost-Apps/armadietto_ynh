@@ -81,7 +81,7 @@ The Armadietto_ynh package is still under development, so you should expect some
 
 * Official app website: <https://remotestorage.io/>
 * Upstream app code repository: <https://github.com/remotestorage/armadietto>
-* YunoHost documentation for this app: <https://yunohost.org/app_armadietto>
+* YunoHost Store: <https://apps.yunohost.org/app/armadietto>
 * Report a bug: <https://github.com/YunoHost-Apps/armadietto_ynh/issues>
 
 ## Developer info
