@@ -23,8 +23,8 @@ Le paquet Armadietto_ynh est toujours en cours de développement, vous devez don
 
 ### **Notes importantes**
 
-- RemoteStorage nécessite un domaine dédié, il faut donc en obtenir un et l'ajouter en utilisant le panneau d'administration de YunoHost. **Domaines -> Ajouter un domaine**. 
-- Comme RemoteStorage utilise le domaine complet et est installé à la racine, vous pouvez créer un sous-domaine tel que remote.domain.tld. 
+- RemoteStorage nécessite un domaine dédié, il faut donc en obtenir un et l'ajouter en utilisant le panneau d'administration de YunoHost. **Domaines -> Ajouter un domaine**.
+- Comme RemoteStorage utilise le domaine complet et est installé à la racine, vous pouvez créer un sous-domaine tel que remote.domain.tld.
 - N'oubliez pas de mettre à jour vos DNS si vous les gérez manuellement.
 
 - RemoteStorage nécessite des certificats SSL approuvés par le navigateur. Si vous disposez de certificats qui ne sont pas émis par [Let's Encrypt](https://letsencrypt.org/), installez-les manuellement comme d'habitude.

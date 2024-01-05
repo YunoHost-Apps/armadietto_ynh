@@ -14,4 +14,4 @@ name = "Settings"
         yes = '1'
         no = ''
         help = "Would you like to allow visitors to register and create an account?"
-        bind = "signup:/opt/yunohost/__APP__/server.js"
+        bind = "signup:/var/www/__APP__/server.js"

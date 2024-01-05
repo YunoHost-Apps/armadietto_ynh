@@ -9,41 +9,7 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-#=================================================
-# LOAD SETTINGS
-#=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=1
-
-app=$YNH_APP_INSTANCE_NAME
-
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-port=$(ynh_app_setting_get --app=$app --key=port)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-is_signup=$(ynh_app_setting_get --app=$app --key=is_signup)
-
-#=================================================
-# CHECK VERSION
-#=================================================
-ynh_script_progression --message="Checking version..." --weight=1
-
 upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
-#=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=4
-
-# Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
-	ynh_clean_check_starting
-	# Restore it if the upgrade fails
-	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -61,67 +27,19 @@ ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
 # If is_signup doesn't exist, create it
 if [ -z "$is_signup" ]; then
-	is_signup="true"
-	ynh_app_setting_set --app=$app --key=is_signup --value=$is_signup
-fi
-
-# Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
-
-	ynh_app_setting_delete --app=$app --key=is_public
+    is_signup="true"
+    ynh_app_setting_set --app="$app" --key=is_signup --value=$is_signup
 fi
 
 # Remove old log file
 ynh_secure_remove --file="/var/log/$app/"
 
-if [ -z "$datadir" ]; then
-	ynh_script_progression --message="Creating a data directory..." --weight=1
-
-	ynh_app_setting_set --app=$app --key=datadir --value=$datadir
-
-	# Create app data folder
-	mkdir -p $datadir
-
-	chmod 750 "$datadir"
-	chmod -R o-rwx "$datadir"
-	chown -R $app:www-data "$datadir"
-fi
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
-
-#=================================================
-# CHECK AND CREATE FINAL_PATH
-#=================================================
-ynh_script_progression --message="Setting up and create final app path..." --weight=1
-
-# Create final_path
-mkdir -p "$final_path"
-
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:$app "$final_path"
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..."
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=4
+ynh_script_progression --message="Upgrading NodeJS..." --weight=4
 
-ynh_install_nodejs --nodejs_version=$NODEJS_VERSION
+ynh_install_nodejs --nodejs_version="$NODEJS_VERSION"
 ynh_use_nodejs
 
 #=================================================
@@ -130,15 +48,21 @@ ynh_use_nodejs
 # UPGRADE ARMADIETTO
 #=================================================
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrade armadietto with npm..." --weight=1
+if [ "$upgrade_type" == "UPGRADE_APP" ]; then
+    ynh_script_progression --message="Upgrade armadietto with npm..." --weight=1
 
-	pushd $final_path
-		upstream_version=$(ynh_app_upstream_version)
-		ynh_npm -g i armadietto@$upstream_version
-	popd
+    pushd "$install_dir"
+        upstream_version=$(ynh_app_upstream_version)
+        ynh_npm -g i "armadietto@$upstream_version"
+    popd
 fi
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:$app "$install_dir"
+
+chmod -R o-rwx "$data_dir"
+chown -R "$app:$app" "$data_dir"
 
 #=================================================
 # UPDATE A CONFIG FILE
@@ -148,35 +72,25 @@ ynh_script_progression --message="Updating a configuration file..." --weight=2
 # Define armadietto module path
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
-ynh_add_config --template="../conf/server.js" --destination="$final_path/server.js"
+ynh_add_config --template="../conf/server.js" --destination="$install_dir/server.js"
 
-chmod 400 "$final_path/server.js"
-chown $app:$app "$final_path/server.js"
+chmod 400 "$install_dir/server.js"
+chown $app:$app "$install_dir/server.js"
 
 #=================================================
-# SETUP SYSTEMD
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --weight=3
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Upgrading logrotate configuration..." --weight=2
+yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
 
 # Use logrotate to manage app-specific logfile(s)
 ynh_use_logrotate --non-append
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
-
-yunohost service add $app --description="Armadietto run a remotestorage server as service" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -184,13 +98,6 @@ yunohost service add $app --description="Armadietto run a remotestorage server a
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=2
-
-ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
