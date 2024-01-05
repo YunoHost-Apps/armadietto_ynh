@@ -37,7 +37,7 @@ chown -R $app:$app "$data_dir"
 #=================================================
 # REINSTALL DEPENDENCIES
 #=================================================
-#REMOVEME? ynh_script_progression --message="Reinstalling dependencies..." --weight=21
+ynh_script_progression --message="Reinstalling NodeJS..." --weight=21
 
 # Define and install dependencies
 ynh_install_nodejs --nodejs_version="$NODEJS_VERSION"
