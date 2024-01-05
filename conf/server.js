@@ -5,7 +5,7 @@ let server;
 
 // const type = process.argv[2];
 
-store = new Armadietto.FileTree({path: '__DATADIR__'});
+store = new Armadietto.FileTree({path: '__DATA_DIR__/storage'});
 
 server = new Armadietto({
   store: store,
@@ -26,4 +26,3 @@ server = new Armadietto({
 
 console.log('LISTENING ON PORT __PORT__');
 server.boot();
-
