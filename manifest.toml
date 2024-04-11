@@ -7,7 +7,7 @@ name = "Armadietto"
 description.en = "RemoteStorage server running as a nodejs web service with systemd"
 description.fr = "Serveur remoteStorage excécuté en tant que service web nodejs par systemd"
 
-version = "0.2.0~ynh2"
+version = "0.2.0~ynh3"
 
 maintainers = ["bencharp"]
 
@@ -44,6 +44,14 @@ ram.runtime = "100M"
     default = false
 
 [resources]
+    [resources.sources.main]
+    # NOT used in install script, only for autoupdate
+    url = "https://github.com/remotestorage/armadietto/archive/refs/tags/v0.2.0.tar.gz"
+    sha256 = "b12859a358fa5837eda612e8a2c86062a6d4f3a43fcc52b54decd84262a3bfcf"
+    prefetch = false
+    autoupdate.strategy = "latest_github_release"
+    autoupdate.needs_manual_tweaks = true
+
     [resources.system_user]
 
     [resources.install_dir]
