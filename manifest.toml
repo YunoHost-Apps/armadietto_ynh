@@ -7,7 +7,7 @@ name = "Armadietto"
 description.en = "RemoteStorage server running as a nodejs web service with systemd"
 description.fr = "Serveur remoteStorage excécuté en tant que service web nodejs par systemd"
 
-version = "0.2.0~ynh3"
+version = "0.2.0~ynh4"
 
 maintainers = ["bencharp"]
 
@@ -17,7 +17,7 @@ website = "https://remotestorage.io/"
 code = "https://github.com/remotestorage/armadietto"
 
 [integration]
-yunohost = ">= 11.0.9"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
 ldap = false
@@ -28,7 +28,6 @@ ram.runtime = "100M"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
 
     [install.init_main_permission]
