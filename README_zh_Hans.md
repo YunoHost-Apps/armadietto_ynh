@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 Armadietto
+# YunoHost 上的 Armadietto
 
 [![集成程度](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![工作状态](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
 
@@ -37,7 +37,7 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**分发版本：** 0.2.0~ynh3
+**分发版本：** 0.2.0~ynh4
 
 ## 截图
 

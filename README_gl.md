@@ -37,14 +37,14 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**Versión proporcionada:** 0.2.0~ynh3
+**Versión proporcionada:** 0.2.0~ynh4
 
 ## Capturas de pantalla
 
 ![Captura de pantalla de Armadietto](./doc/screenshots/armadietto-welcome.png)
 ![Captura de pantalla de Armadietto](./doc/screenshots/armadietto-signup.png)
 
-## :red_circle: Caraterísticas cuestionables
+## :red_circle: Debes considerar
 
 - **Alpha software**: Early development stage. May contain changing or unstable features, bugs, and security vulnerability.
 

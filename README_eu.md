@@ -37,7 +37,7 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**Paketatutako bertsioa:** 0.2.0~ynh3
+**Paketatutako bertsioa:** 0.2.0~ynh4
 
 ## Pantaila-argazkiak
 
