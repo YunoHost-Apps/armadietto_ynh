@@ -41,8 +41,8 @@ This option can be enabled in the configuration panel.
 
 ## Screenshots
 
-![Screenshot of Armadietto](./doc/screenshots/armadietto-signup.png)
 ![Screenshot of Armadietto](./doc/screenshots/armadietto-welcome.png)
+![Screenshot of Armadietto](./doc/screenshots/armadietto-signup.png)
 
 ## :red_circle: Antifeatures
 
