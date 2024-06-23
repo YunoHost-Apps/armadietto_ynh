@@ -41,8 +41,8 @@ This option can be enabled in the configuration panel.
 
 ## 截图
 
-![Armadietto 的截图](./doc/screenshots/armadietto-signup.png)
 ![Armadietto 的截图](./doc/screenshots/armadietto-welcome.png)
+![Armadietto 的截图](./doc/screenshots/armadietto-signup.png)
 
 ## :red_circle: 负面特征
 
