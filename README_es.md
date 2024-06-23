@@ -41,10 +41,10 @@ This option can be enabled in the configuration panel.
 
 ## Capturas
 
-![Captura de Armadietto](./doc/screenshots/armadietto-welcome.png)
 ![Captura de Armadietto](./doc/screenshots/armadietto-signup.png)
+![Captura de Armadietto](./doc/screenshots/armadietto-welcome.png)
 
-## :red_circle: funcionalidades no deseadas
+## :red_circle: Características no deseables
 
 - **Alpha software**: Early development stage. May contain changing or unstable features, bugs, and security vulnerability.
 

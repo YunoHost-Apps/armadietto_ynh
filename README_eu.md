@@ -41,12 +41,12 @@ This option can be enabled in the configuration panel.
 
 ## Pantaila-argazkiak
 
-![Armadietto(r)en pantaila-argazkia](./doc/screenshots/armadietto-welcome.png)
 ![Armadietto(r)en pantaila-argazkia](./doc/screenshots/armadietto-signup.png)
+![Armadietto(r)en pantaila-argazkia](./doc/screenshots/armadietto-welcome.png)
 
 ## :red_circle: Ezaugarri zalantzagarriak
 
-- **Alfa softwarea**: Garapenaren hasierako fasean dago. Ezaugarri aldakor edo ezegonkorrak, erroreak eta segurtasuneko arazoak izan ditzazke.
+- **Alfa softwarea**: Garapenaren hasierako fasean dago. Ezaugarri aldakor edo ezegonkorrak, erroreak eta segurtasun-arazoak izan ditzazke.
 
 ## Dokumentazioa eta baliabideak
 
