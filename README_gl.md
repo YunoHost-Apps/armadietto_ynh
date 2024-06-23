@@ -41,8 +41,8 @@ This option can be enabled in the configuration panel.
 
 ## Capturas de pantalla
 
-![Captura de pantalla de Armadietto](./doc/screenshots/armadietto-signup.png)
 ![Captura de pantalla de Armadietto](./doc/screenshots/armadietto-welcome.png)
+![Captura de pantalla de Armadietto](./doc/screenshots/armadietto-signup.png)
 
 ## :red_circle: Debes considerar
 
