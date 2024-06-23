@@ -41,8 +41,8 @@ This option can be enabled in the configuration panel.
 
 ## Capturas
 
-![Captura de Armadietto](./doc/screenshots/armadietto-welcome.png)
 ![Captura de Armadietto](./doc/screenshots/armadietto-signup.png)
+![Captura de Armadietto](./doc/screenshots/armadietto-welcome.png)
 
 ## :red_circle: Características no deseables
 
