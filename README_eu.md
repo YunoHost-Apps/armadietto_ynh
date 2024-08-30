@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Armadietto YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/armadietto.svg)](https://ci-apps.yunohost.org/ci/apps/armadietto/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
 
 [![Instalatu Armadietto YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
@@ -37,7 +37,7 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**Paketatutako bertsioa:** 0.2.0~ynh4
+**Paketatutako bertsioa:** 0.6.0~ynh1
 
 ## Pantaila-argazkiak
 
