@@ -5,7 +5,7 @@ Il NE doit PAS être modifié à la main.
 
 # Armadietto pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
+[![Niveau d’intégration](https://dash.yunohost.org/integration/armadietto.svg)](https://ci-apps.yunohost.org/ci/apps/armadietto/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
 
 [![Installer Armadietto avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
@@ -37,7 +37,7 @@ Cette option peut être activée via le panneau de configutration.
 [Cliquez ici](https://remotestorage.io/apps/) pour voir une liste non exhaustive d'applications ayant intégré remoteStorage comme option de stockage/synchronisation.
 
 
-**Version incluse :** 0.2.0~ynh4
+**Version incluse :** 0.6.0~ynh1
 
 ## Captures d’écran
 
