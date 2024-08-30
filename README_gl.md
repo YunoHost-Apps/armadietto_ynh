@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Armadietto para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/armadietto.svg)](https://dash.yunohost.org/appci/app/armadietto) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/armadietto.svg)](https://ci-apps.yunohost.org/ci/apps/armadietto/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/armadietto.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/armadietto.maintain.svg)
 
 [![Instalar Armadietto con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=armadietto)
 
@@ -37,7 +37,7 @@ This option can be enabled in the configuration panel.
 [Here](https://remotestorage.io/apps/) is a non-exhaustive list of apps that have integrated remoteStorage as a storage/sync option.
 
 
-**Versión proporcionada:** 0.2.0~ynh4
+**Versión proporcionada:** 0.6.0~ynh1
 
 ## Capturas de pantalla
 
