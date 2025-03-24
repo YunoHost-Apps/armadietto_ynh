@@ -26,7 +26,7 @@ ynh_script_progression --message="Install armadietto with npm..." --weight=1
 
 pushd "$install_dir"
     upstream_version=$(ynh_app_upstream_version)
-    ynh_exec_warn_less ynh_npm -g i "armadietto@$upstream_version"
+    ynh_exec_warn_less $ynh_npm -g i "armadietto@$upstream_version"
 popd
 
 chmod 750 "$install_dir"
