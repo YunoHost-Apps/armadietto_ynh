@@ -18,15 +18,12 @@ ynh_install_nodejs --nodejs_version="$NODEJS_VERSION"
 ynh_use_nodejs
 
 #=================================================
-# SPECIFIC SETUP
-#=================================================
 # INSTALL ARMADIETTO
 #=================================================
 ynh_script_progression --message="Install armadietto with npm..." --weight=1
 
 pushd "$install_dir"
-    upstream_version=$(ynh_app_upstream_version)
-    ynh_exec_warn_less $ynh_npm i "armadietto@$upstream_version"
+    ynh_exec_warn_less $ynh_npm -g i armadietto@$(ynh_app_upstream_version)
 popd
 
 chmod 750 "$install_dir"
@@ -44,7 +41,7 @@ ynh_script_progression --message="Adding a configuration file..." --weight=2
 # Define armadietto module path
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
-ynh_add_config --template="../conf/server.js" --destination="$install_dir/server.js"
+ynh_add_config --template="server.js" --destination="$install_dir/server.js"
 
 chmod 400 "$install_dir/server.js"
 chown $app:$app "$install_dir/server.js"
