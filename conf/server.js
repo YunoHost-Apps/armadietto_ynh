@@ -1,5 +1,5 @@
 const path = require('path');
-const Armadietto = require('__MODULE_PATH__/armadietto');
+const Armadietto = require('__INSTALL_DIR__/lib/node_modules/armadietto/lib/armadietto'); 
 let store;
 
 const type = process.argv[2];
