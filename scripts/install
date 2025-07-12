@@ -28,7 +28,8 @@ chown -R "$app:$app" "$install_dir"
 #=================================================
 ynh_script_progression "Adding $app's configuration..."
 
-module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+#module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
+module_path="/opt/node_n/n/versions/node/$nodejs_version/lib/node_modules/armadietto"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
 
