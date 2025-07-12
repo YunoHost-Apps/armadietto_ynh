@@ -16,7 +16,7 @@ ynh_nodejs_install
 ynh_script_progression "Install armadietto with npm..."
 
 pushd "$install_dir"
-    ynh_hide_warnings ynh_exec_as_app npm install -g armadietto@$(ynh_app_upstream_version)
+    ynh_hide_warnings ynh_exec_as_app npm -g install armadietto@$(ynh_app_upstream_version)
 popd
 
 chmod 750 "$install_dir"
