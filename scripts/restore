@@ -5,6 +5,14 @@ source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# REINSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression "Reinstalling NodeJS..."
+
+# Define and install dependencies
+ynh_nodejs_install
+
+#=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
 ynh_script_progression "Restoring the app main directory..."
@@ -17,23 +25,6 @@ ynh_restore "$install_dir"
 ynh_script_progression "Restoring the data directory..."
 
 ynh_restore "$data_dir"
-
-#=================================================
-# REINSTALL DEPENDENCIES
-#=================================================
-ynh_script_progression "Reinstalling NodeJS..."
-
-# Define and install dependencies
-ynh_nodejs_install
-
-#=================================================
-# INSTALL ARMADIETTO
-#=================================================
-ynh_script_progression "Install armadietto with npm..."
-
-#pushd $install_dir
-#    npm -g i armadietto@$(ynh_app_upstream_version)
-#popd
 
 #=================================================
 # RESTORE SYSTEM CONFIGURATIONS

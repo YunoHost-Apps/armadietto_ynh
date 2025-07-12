@@ -18,8 +18,6 @@ ynh_script_progression "Updating NGINX web server configuration..."
 ynh_config_change_url_nginx
 
 #=================================================
-# SPECIFIC MODIFICATIONS
-#=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating configuration..."
@@ -29,9 +27,6 @@ ynh_script_progression "Updating configuration..."
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
-
-chmod 400 "$install_dir/server.js"
-chown $app:$app "$install_dir/server.js"
 
 #=================================================
 # START SYSTEMD SERVICE

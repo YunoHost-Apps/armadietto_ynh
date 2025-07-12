@@ -9,9 +9,11 @@ name = "Settings"
     services = ["__APP__"]
 
         [main.is_signup.is_signup]
-        ask = "Allow signups?"
+        ask.en = "Allow signups?"
+        ask.fr = "Autoriser les inscriptions ?"
         type = "boolean"
         yes = '1'
         no = ''
-        help = "Would you like to allow visitors to register and create an account?"
+        help.en = "Would you like to allow visitors to register and create an account?"
+        help.fr = "Souhaitez-vous autoriser les visiteurs à s'inscrire et créer un compte ?"
         bind = "signup:/var/www/__APP__/server.js"

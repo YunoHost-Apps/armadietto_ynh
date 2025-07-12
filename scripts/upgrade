@@ -25,9 +25,6 @@ ynh_script_progression "Ensuring downward compatibility..."
 # If is_signup doesn't exist, create it
 ynh_app_setting_set_default --key=is_signup --value="true"
 
-# Remove old log file
-ynh_safe_rm "/var/log/$app/"
-
 #=================================================
 # UPGRADE ARMADIETTO
 #=================================================
@@ -45,6 +42,8 @@ chown -R "$app:$app" "$install_dir"
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating configuration..."
+
+module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
 
