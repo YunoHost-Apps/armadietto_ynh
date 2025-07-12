@@ -11,20 +11,6 @@ ynh_script_progression "Stopping $app's systemd service..."
 ynh_systemctl --service=$app --action="stop"
 
 #=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-ynh_script_progression "Ensuring downward compatibility..."
-
-# If is_signup doesn't exist, create it
-if [ -z "$is_signup" ]; then
-    is_signup="true"
-    ynh_app_setting_set --key=is_signup --value=$is_signup
-fi
-
-# Remove old log file
-ynh_safe_rm "/var/log/$app/"
-
-#=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 ynh_script_progression "Upgrading NodeJS..."
@@ -32,24 +18,28 @@ ynh_script_progression "Upgrading NodeJS..."
 ynh_nodejs_install
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression "Ensuring downward compatibility..."
+
+# If is_signup doesn't exist, create it
+ynh_app_setting_set_default --key=is_signup --value="true"
+
+# Remove old log file
+ynh_safe_rm "/var/log/$app/"
+
+#=================================================
 # UPGRADE ARMADIETTO
 #=================================================
+ynh_script_progression "Upgrade armadietto with npm..."
 
-# FIXME: this is still supported but the recommendation is now to *always* re-setup the app sources wether or not the upstream sources changed
-if ynh_app_upstream_version_changed; then
-    ynh_script_progression "Upgrade armadietto with npm..."
+pushd "$install_dir"
+    ynh_hide_warnings ynh_exec_as_app npm install armadietto@$(ynh_app_upstream_version)
+popd
 
-    pushd "$install_dir"
-        upstream_version=$(ynh_app_upstream_version)
-        npm -g i "armadietto@$upstream_version"
-    popd
-fi
-
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 750 "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:$app "$install_dir"
-chmod -R o-rwx "$data_dir"
-chown -R "$app:$app" "$data_dir"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:$app" "$install_dir"
 
 #=================================================
 # UPDATE A CONFIG FILE
@@ -60,9 +50,6 @@ ynh_script_progression "Updating configuration..."
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
-
-chmod 400 "$install_dir/server.js"
-chown $app:$app "$install_dir/server.js"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
