@@ -6,7 +6,7 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
+
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -31,10 +31,10 @@ ynh_remove_logrotate
 #=================================================
 # REMOVE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Removing NodeJS..." --weight=2
+#REMOVEME? ynh_script_progression --message="Removing NodeJS..." --weight=2
 
 # Remove metapackage and its dependencies
-ynh_remove_nodejs --nodejs_version=$NODEJS_VERSION
+#REMOVEME? ynh_remove_nodejs --#REMOVEME? nodejs_version=$NODEJS_VERSION
 
 #=================================================
 # END OF SCRIPT

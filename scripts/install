@@ -6,16 +6,16 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
+
 source /usr/share/yunohost/helpers
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing NodeJS..." --weight=23
+#REMOVEME? ynh_script_progression --message="Installing NodeJS..." --weight=23
 
-ynh_install_nodejs --nodejs_version="$NODEJS_VERSION"
-ynh_use_nodejs
+#REMOVEME? ynh_install_nodejs --#REMOVEME? nodejs_version="$NODEJS_VERSION"
+#REMOVEME? ynh_use_nodejs
 
 #=================================================
 # INSTALL ARMADIETTO

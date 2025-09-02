@@ -6,7 +6,7 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
+
 source /usr/share/yunohost/helpers
 
 upgrade_type=$(ynh_check_app_version_changed)
@@ -37,10 +37,10 @@ ynh_secure_remove --file="/var/log/$app/"
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Upgrading NodeJS..." --weight=4
+#REMOVEME? ynh_script_progression --message="Upgrading NodeJS..." --weight=4
 
-ynh_install_nodejs --nodejs_version="$NODEJS_VERSION"
-ynh_use_nodejs
+#REMOVEME? ynh_install_nodejs --#REMOVEME? nodejs_version="$NODEJS_VERSION"
+#REMOVEME? ynh_use_nodejs
 
 #=================================================
 # SPECIFIC UPGRADE

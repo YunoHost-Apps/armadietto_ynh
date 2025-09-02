@@ -6,7 +6,7 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
+
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -33,7 +33,7 @@ ynh_change_url_nginx_config
 ynh_script_progression --message="Updating a configuration file..." --weight=2
 
 # Define armadietto module path
-ynh_use_nodejs
+#REMOVEME? ynh_use_nodejs
 module_path="$node_version_path/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_add_config --template="../conf/server.js" --destination="$install_dir/server.js"
