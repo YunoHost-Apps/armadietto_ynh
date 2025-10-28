@@ -53,6 +53,9 @@ module_path="$path_with_nodejs/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
 
+chmod 400 "$install_dir/server.js"
+chown $app:$app "$install_dir/server.js"
+
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
