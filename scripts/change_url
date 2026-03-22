@@ -17,14 +17,11 @@ ynh_script_progression "Updating NGINX web server configuration..."
 ynh_config_change_url_nginx
 
 #=================================================
-# SPECIFIC MODIFICATIONS
-#=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating configuration..."
 
 # Define armadietto module path
-
 module_path="/opt/node_n/n/versions/node/$nodejs_version/lib/node_modules/armadietto/lib"
 
 ynh_config_add --template="server.js" --destination="$install_dir/server.js"
