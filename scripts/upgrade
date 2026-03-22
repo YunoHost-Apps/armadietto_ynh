@@ -29,7 +29,6 @@ ynh_safe_rm "/var/log/$app/"
 ynh_script_progression "Upgrade armadietto with npm..."
 
 pushd "$install_dir"
-    upstream_version=$(ynh_app_upstream_version)
     ynh_hide_warnings npm -g i armadietto@$(ynh_app_upstream_version)
 popd
 
