@@ -8,10 +8,10 @@ It shall NOT be edited by hand.
   Armadietto, packaged for YunoHost
 </h1>
 
-RemoteStorage server running as a nodejs web service with systemd
+RemoteStorage server
 
 [![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://remotestorage.io/)
-[![Version: 0.6.0~ynh1](https://img.shields.io/badge/Version-0.6.0~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/armadietto/)
+[![Version: 0.6.4~ynh1](https://img.shields.io/badge/Version-0.6.4~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/armadietto/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/armadietto"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
