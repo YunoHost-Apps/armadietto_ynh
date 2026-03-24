@@ -51,7 +51,7 @@ ram.runtime = "100M"
     url = "https://github.com/remotestorage/armadietto/archive/refs/tags/v0.6.4.tar.gz"
     sha256 = "17d2a041e7dc4546a4dce9b0d0c1180e7f397e6f45c1fb80bdd018ce86923b81"
     prefetch = false
-    autoupdate.strategy = "latest_github_tags"
+    autoupdate.strategy = "latest_github_tag"
     autoupdate.needs_manual_tweaks = true
 
     [resources.system_user]
