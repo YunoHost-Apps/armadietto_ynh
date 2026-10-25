@@ -7,7 +7,7 @@ name = "Armadietto"
 description.en = "RemoteStorage server"
 description.fr = "Serveur remoteStorage"
 
-version = "0.6.4~ynh1"
+version = "0.6.4~ynh2"
 
 maintainers = ["bencharp"]
 
